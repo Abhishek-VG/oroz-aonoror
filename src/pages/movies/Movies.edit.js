@@ -5,6 +5,6 @@ const MoviesEdit = () => {
   const { id } = useParams();
 
   console.log("params:", id);
-  return <p>movie edit{id}</p>;
+  return <p>movie edit{id} writing here</p>;
 };
 export default MoviesEdit;
