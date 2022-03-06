@@ -31,7 +31,7 @@ const MoviesAdd = () => {
           noValidate
           autoComplete="off"
         >
-          <form onSubmit={handleSubmit}>
+          <form id="ourform" onSubmit={handleSubmit}>
             <div>
             <TextField
               id="outlined-required"

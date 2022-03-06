@@ -18,3 +18,31 @@
 
 in cmd, go to the main directory,
 run `code .`
+
+### API MOCK
+
+1. To add an movie object
+`fetchApi("http://localhost:8080/movie", {method: "POST", body: { name: "jyo12" }})`
+
+2. To delete an movie object
+`fetchApi("http://localhost:8080/movie/{id}", {method: "DELETE"})`
+
+3. To fetch an movie object
+`fetchApi("http://localhost:8080/movie/{id}", {method: "GET"})`
+
+4. to update a movie object
+`fetchApi("http://localhost:8080/movie/{id}", {method: "PUT", body: {name: "MJ"}})`
+
+5. to get all the list
+`fetchApi("http://localhost:8080/movie", {method: "GET"})`
+
+6. to flush/delete database
+`fetchApi("http://localhost:8080/movie/flush", {method: "DELETE"})`
+
+append
+`.then(resp => resp.json()).then(obj => console.log(obj))`
+example
+`fetchApi("http://localhost:8080/movie", {method: "GET"}).then(resp => resp.json()).then(obj => console.log(obj))`
+
+
+
