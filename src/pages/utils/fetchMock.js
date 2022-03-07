@@ -75,7 +75,7 @@ const updateToLocalStorage = (URL, data) => {
   if (index === -1) {
     return false;
   } else {
-    parsedData.splice(index, 1, {data, id});
+    parsedData.splice(index, 1, { ...data, id });
     postData(parsedData);
     return true;
   }
