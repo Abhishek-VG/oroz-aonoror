@@ -134,7 +134,7 @@ export default function MiniDrawer() {
         <Divider />
         <List>
           {" "}
-          <Link to="/movie/add">
+          <Link to="/movies/add">
             <ListItemButton
               key={"movie"}
               sx={{
@@ -158,7 +158,7 @@ export default function MiniDrawer() {
               />
             </ListItemButton>
           </Link>
-          <Link to="/movie/edit/1">
+          <Link to="/movies/edit/1">
             <ListItemButton
               key={"movie"}
               sx={{
@@ -182,7 +182,7 @@ export default function MiniDrawer() {
               />
             </ListItemButton>
           </Link>
-          <Link to="/movie/list">
+          <Link to="/movies/list">
             <ListItemButton
               key={"movie"}
               sx={{
@@ -202,6 +202,78 @@ export default function MiniDrawer() {
               </ListItemIcon>
               <ListItemText
                 primary={"Movie List"}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
+            </ListItemButton>
+          </Link>
+          <Link to="/theaters/add">
+            <ListItemButton
+              key={"movie"}
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary={"theaters add"}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
+            </ListItemButton>
+          </Link>
+          <Link to="/theaters/edit/1">
+            <ListItemButton
+              key={"movie"}
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary={"theaters edit"}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
+            </ListItemButton>
+          </Link>
+          <Link to="/theaters/list">
+            <ListItemButton
+              key={"movie"}
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary={"theaters List"}
                 sx={{ opacity: open ? 1 : 0 }}
               />
             </ListItemButton>
