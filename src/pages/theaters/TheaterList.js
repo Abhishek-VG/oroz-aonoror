@@ -8,6 +8,9 @@ import TableRow from "@mui/material/TableRow";
 import { fetchApi } from "../utils/fetchMock";
 import Paper from "@mui/material/Paper";
 import { useNavigate } from "react-router-dom";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+
 const TheaterList = () => {
   const [theaterList, settheaterList] = React.useState([]);
   let navigate = useNavigate();
@@ -19,15 +22,18 @@ const TheaterList = () => {
         settheaterList(obj);
       });
   }, []);
-
+  const editHandler = (id) => {
+    navigate(`/theaters/edit/${id}`);
+  };
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
+            <TableCell>Theater Name</TableCell>
+            <TableCell align="right">Date</TableCell>
+            <TableCell align="right">Theater Location</TableCell>
+            <TableCell align="right">Action</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -41,6 +47,10 @@ const TheaterList = () => {
               </TableCell>
               <TableCell align="right">{row.theaterDate}</TableCell>
               <TableCell align="right">{row.theaterLocation}</TableCell>
+              <TableCell align="right">
+                <EditRoundedIcon onClick={() => editHandler(row.id)} />
+                <DeleteRoundedIcon />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

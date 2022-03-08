@@ -57,6 +57,7 @@ const TheaterAdd = () => {
                 required
                 id="outlined-required"
                 label="Theater Name"
+                value={theaterName}
                 onChange={theaterNameHandler}
               />
             </div>
@@ -65,6 +66,7 @@ const TheaterAdd = () => {
                 required
                 id="outlined-required"
                 type="date"
+                value={theaterDate}
                 onChange={theaterDatehandler}
               />
             </div>
@@ -74,6 +76,7 @@ const TheaterAdd = () => {
                 type="text"
                 id="outlined-required"
                 label="Theater Location"
+                value={theaterLocation}
                 onChange={theaterLocationHandler}
               />
             </div>
