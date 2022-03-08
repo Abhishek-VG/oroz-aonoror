@@ -44,22 +44,22 @@ const postData = (data, table) => {
 
 const getFromLocalStorage = (URL) => {
   const parsedData = getData(getDb(URL));
-  if (URL === "http://localhost:8080/movie") {
-    return parsedData;
+  const id = getId(URL);
+  if(!isNaN(id)) {
+    return parsedData.find((obj) => +obj.id === +id);
   } else {
-    const id = URL.replace("http://localhost:8080/movie/", "");
-    return parsedData.find((obj) => obj.id == id);
+    return parsedData;
   }
 };
 
 const deleteFromLocalStorage = (URL) => {
-  if (URL === "http://localhost:8080/movie/flush") {
+  if (getId(URL) === "flush") {
     deleteAll();
     return true;
   }
   const parsedData = getData(getDb(URL));
-  const id = URL.replace("http://localhost:8080/movie/", "");
-  const index = parsedData.findIndex((obj) => obj.id == id);
+  const id = getId(URL);
+  const index = parsedData.findIndex((obj) => +obj.id === +id);
   if (index === -1) {
     return false;
   } else {
@@ -78,7 +78,7 @@ const addToLocalStorage = (URL, data) => {
 
 const updateToLocalStorage = (URL, data) => {
   const parsedData = getData(getDb(URL));
-  const id = URL.replace("http://localhost:8080/movie/", "");
+  const id = getId(URL);
   const index = parsedData.findIndex(
     (obj) => obj.id.toString() === id.toString()
   );
@@ -91,9 +91,14 @@ const updateToLocalStorage = (URL, data) => {
   }
 };
 
-const deleteAll = () => localStorage.removeItem("movieDataBase");
+const deleteAll = () => {
+  localStorage.removeItem("movieDataBase");
+  localStorage.removeItem("theaterDataBase");
+}
 
 const getDb = (URL) => URL.includes("movie") ? "movieDataBase" : "theaterDataBase";
+
+const getId = (URL) => URL.split("/").pop();
 
 // fetchApi("http://localhost:8080/movie", {method: "GET"}).then(a=>a.json()).then(aa=>console.log(aa))
 // fetchApi("http://localhost:8080/movie", {method: "GET"}).then(a=>a.json()).then(aa=>console.log(aa))

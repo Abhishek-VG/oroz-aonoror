@@ -18,7 +18,10 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import MovieCreationIcon from "@mui/icons-material/MovieCreation";
-import { Link, Outlet } from "react-router-dom";
+import { Link as LinkMui, Outlet } from "react-router-dom";
+import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 
 const drawerWidth = 240;
 
@@ -42,6 +45,7 @@ const closedMixin = (theme) => ({
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
 });
+
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -85,6 +89,13 @@ const Drawer = styled(MuiDrawer, {
     ...closedMixin(theme),
     "& .MuiDrawer-paper": closedMixin(theme),
   }),
+}));
+
+const Link = styled(LinkMui, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+  color: "inherit",
+  textDecoration: "none",
 }));
 
 export default function MiniDrawer() {
@@ -134,7 +145,13 @@ export default function MiniDrawer() {
         <Divider />
         <List>
           {" "}
-          <Link to="/movies/add">
+          <Link
+            to="/movies/add"
+            style={{
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
             <ListItemButton
               key={"movie"}
               sx={{
@@ -150,7 +167,7 @@ export default function MiniDrawer() {
                   justifyContent: "center",
                 }}
               >
-                <MovieCreationIcon />
+                <AddIcon />
               </ListItemIcon>
               <ListItemText
                 primary={"Movie Add"}
@@ -174,7 +191,7 @@ export default function MiniDrawer() {
                   justifyContent: "center",
                 }}
               >
-                <MailIcon />
+                <EditIcon />
               </ListItemIcon>
               <ListItemText
                 primary={"Movie Edit"}
@@ -198,7 +215,7 @@ export default function MiniDrawer() {
                   justifyContent: "center",
                 }}
               >
-                <MailIcon />
+                <FormatListBulletedIcon />
               </ListItemIcon>
               <ListItemText
                 primary={"Movie List"}
@@ -206,6 +223,7 @@ export default function MiniDrawer() {
               />
             </ListItemButton>
           </Link>
+          <Divider />
           <Link to="/theaters/add">
             <ListItemButton
               key={"movie"}
@@ -222,7 +240,7 @@ export default function MiniDrawer() {
                   justifyContent: "center",
                 }}
               >
-                <MailIcon />
+                <AddIcon />
               </ListItemIcon>
               <ListItemText
                 primary={"theaters add"}
@@ -246,7 +264,7 @@ export default function MiniDrawer() {
                   justifyContent: "center",
                 }}
               >
-                <MailIcon />
+                <EditIcon />
               </ListItemIcon>
               <ListItemText
                 primary={"theaters edit"}
@@ -270,7 +288,7 @@ export default function MiniDrawer() {
                   justifyContent: "center",
                 }}
               >
-                <MailIcon />
+                <FormatListBulletedIcon />
               </ListItemIcon>
               <ListItemText
                 primary={"theaters List"}

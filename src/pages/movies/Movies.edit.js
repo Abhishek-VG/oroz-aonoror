@@ -55,7 +55,7 @@ const MoviesEdit = () => {
       .then((resp) => resp.json())
       .then((obj) => {
         console.log(obj);
-        navigate(`/movie/list`);
+        navigate(`/movies/list`);
       });
   };
 

@@ -32,10 +32,10 @@ const MoviesList = () => {
       });
   };
   const clickHandler = () => {
-    navigate("/movie/add");
+    navigate("/movies/add");
   };
   const handleEdit = (id) => {
-    navigate(`/movie/edit/${id}`);
+    navigate(`/movies/edit/${id}`);
   };
   const handleDelete = (id) => {
     fetchApi(`http://localhost:8080/movie/${id}`, { method: "DELETE" });
