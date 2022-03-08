@@ -19,21 +19,31 @@ export const fetchApi = (URL, config) => {
   }
 };
 
-const getData = () => {
-  let data = JSON.parse(localStorage.getItem("movieDataBase"));
+const getData = (table) => {
+  let data;
+  if(table === "movieDataBase") {
+    data = JSON.parse(localStorage.getItem("movieDataBase"));
+  } else {
+    data = JSON.parse(localStorage.getItem("theaterDataBase"));
+  }
+
   if (!Array.isArray(data)) {
-    postData([]);
+    postData([], table);
     data = [];
   }
   return data;
 };
 
-const postData = (data) => {
-  return localStorage.setItem("movieDataBase", JSON.stringify(data));
+const postData = (data, table) => {
+  if(table === "movieDataBase") {
+    return localStorage.setItem("movieDataBase", JSON.stringify(data));
+  } else {
+    return localStorage.setItem("theaterDataBase", JSON.stringify(data));
+  }
 };
 
 const getFromLocalStorage = (URL) => {
-  const parsedData = getData();
+  const parsedData = getData(getDb(URL));
   if (URL === "http://localhost:8080/movie") {
     return parsedData;
   } else {
@@ -47,27 +57,27 @@ const deleteFromLocalStorage = (URL) => {
     deleteAll();
     return true;
   }
-  const parsedData = getData();
+  const parsedData = getData(getDb(URL));
   const id = URL.replace("http://localhost:8080/movie/", "");
   const index = parsedData.findIndex((obj) => obj.id == id);
   if (index === -1) {
     return false;
   } else {
     parsedData.splice(index, 1);
-    postData(parsedData);
+    postData(parsedData, getDb(URL));
     return true;
   }
 };
 
 const addToLocalStorage = (URL, data) => {
-  const parsedData = getData();
+  const parsedData = getData(getDb(URL));
   parsedData.push({ ...data, id: Date.now() });
-  postData(parsedData);
+  postData(parsedData, getDb(URL));
   return true;
 };
 
 const updateToLocalStorage = (URL, data) => {
-  const parsedData = getData();
+  const parsedData = getData(getDb(URL));
   const id = URL.replace("http://localhost:8080/movie/", "");
   const index = parsedData.findIndex(
     (obj) => obj.id.toString() === id.toString()
@@ -76,12 +86,14 @@ const updateToLocalStorage = (URL, data) => {
     return false;
   } else {
     parsedData.splice(index, 1, { ...data, id });
-    postData(parsedData);
+    postData(parsedData, getDb(URL));
     return true;
   }
 };
 
 const deleteAll = () => localStorage.removeItem("movieDataBase");
+
+const getDb = (URL) => URL.includes("movie") ? "movieDataBase" : "theaterDataBase";
 
 // fetchApi("http://localhost:8080/movie", {method: "GET"}).then(a=>a.json()).then(aa=>console.log(aa))
 // fetchApi("http://localhost:8080/movie", {method: "GET"}).then(a=>a.json()).then(aa=>console.log(aa))
