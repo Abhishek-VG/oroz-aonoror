@@ -10,6 +10,7 @@ import { fetchApi } from "../utils/fetchMock";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const MoviesList = () => {
   const [movieList, setMovieList] = React.useState([]);
@@ -22,11 +23,23 @@ const MoviesList = () => {
         setMovieList(obj);
       });
   }, []);
+  const editDeletHandler = () => {
+    fetchApi("http://localhost:8080/movie", { method: "GET" })
+      .then((resp) => resp.json())
+      .then((obj) => {
+        console.log(obj);
+        setMovieList(obj);
+      });
+  };
   const clickHandler = () => {
     navigate("/movie/add");
   };
   const handleEdit = (id) => {
     navigate(`/movie/edit/${id}`);
+  };
+  const handleDelete = (id) => {
+    fetchApi(`http://localhost:8080/movie/${id}`, { method: "DELETE" });
+    editDeletHandler();
   };
 
   return (
@@ -56,6 +69,7 @@ const MoviesList = () => {
               <TableCell align="right">{row.movieTickets}</TableCell>
               <TableCell align="right">
                 <EditIcon onClick={() => handleEdit(row.id)} />
+                <DeleteIcon onClick={() => handleDelete(row.id)} />
               </TableCell>
             </TableRow>
           ))}
