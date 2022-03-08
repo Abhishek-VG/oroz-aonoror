@@ -45,4 +45,7 @@ example
 `fetchApi("http://localhost:8080/movie", {method: "GET"}).then(resp => resp.json()).then(obj => console.log(obj))`
 
 
+## API MOCK FOR THEATERS
+add "/theater" in place of "/movie"
+
 
