@@ -22,27 +22,27 @@ run `code .`
 ### API MOCK
 
 1. To add an movie object
-   `fetchApi("http://localhost:8080/movie", {method: "POST", body: { name: "jyo12" }})`
+   `fetchApi("http://localhost:8080/movie", {method: "POST", body: { name: "jyo12" }, headers: { X-Auth-token: "access token" }})`
 
 2. To delete an movie object
-   `fetchApi("http://localhost:8080/movie/{id}", {method: "DELETE"})`
+   `fetchApi("http://localhost:8080/movie/{id}", {method: "DELETE", headers: { X-Auth-token: "access token" }})`
 
 3. To fetch an movie object
-   `fetchApi("http://localhost:8080/movie/{id}", {method: "GET"})`
+   `fetchApi("http://localhost:8080/movie/{id}", {method: "GET", headers: { X-Auth-token: "access token" }})`
 
 4. to update a movie object
-   `fetchApi("http://localhost:8080/movie/{id}", {method: "PUT", body: {name: "MJ"}})`
+   `fetchApi("http://localhost:8080/movie/{id}", {method: "PUT", body: {name: "MJ"}, headers: { X-Auth-token: "access token" }})`
 
 5. to get all the list
-   `fetchApi("http://localhost:8080/movie", {method: "GET"})`
+   `fetchApi("http://localhost:8080/movie", {method: "GET", headers: { X-Auth-token: "access token" }})`
 
 6. to flush/delete database
-   `fetchApi("http://localhost:8080/movie/flush", {method: "DELETE"})`
+   `fetchApi("http://localhost:8080/movie/flush", {method: "DELETE", headers: { X-Auth-token: "access token" }})`
 
 append
 `.then(resp => resp.json()).then(obj => console.log(obj))`
 example
-`fetchApi("http://localhost:8080/movie", {method: "GET"}).then(resp => resp.json()).then(obj => console.log(obj))`
+`fetchApi("http://localhost:8080/movie", {method: "GET", headers: { X-Auth-token: "access token" }}).then(resp => resp.json()).then(obj => console.log(obj))`
 
 ## API MOCK FOR THEATERS
 
@@ -51,4 +51,6 @@ add "/theater" in place of "/movie"
 ## API mock for use creation
 
 `fetchApi("http://localhost:8080/user/register", {method: "POST", body: { username: "jyo12", password: "passw" }})`
-`fetchApi("http://localhost:8080/user/login", {method: "POST", body: { username: "jyo12", password: "passw" }, headers: { X-Auth-token: "access token" }})`
+`fetchApi("http://localhost:8080/user/login", {method: "POST", body: { username: "jyo12", password: "passw" }})`
+
+
