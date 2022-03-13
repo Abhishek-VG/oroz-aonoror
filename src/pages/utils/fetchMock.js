@@ -91,8 +91,7 @@ const addToLocalStorage = (URL, data) => {
       obj.username === data.username &&
       obj.password === data.password
     ) {
-      tokenGenerate(obj);
-      return true;
+      return {username: obj.username, time: Date.now(), "access-token": tokenGenerate(obj)};
     } else {
       throw Error("Invalid user");
     }
@@ -158,5 +157,6 @@ const tokenCheck = (URL, config) => {
 
 const tokenGenerate = (obj) => {
   const token = btoa(`${obj.username}-${obj.password}-${obj.id}`);
-  localStorage.setItem("access-token", token);
+  // localStorage.setItem("access-token", token);
+  return token;
 };
