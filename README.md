@@ -52,5 +52,6 @@ add "/theater" in place of "/movie"
 
 `fetchApi("http://localhost:8080/user/register", {method: "POST", body: { username: "jyo12", password: "passw" }})`
 `fetchApi("http://localhost:8080/user/login", {method: "POST", body: { username: "jyo12", password: "passw" }})`
+`fetchApi("http://localhost:8080/user/logout")`
 
 
