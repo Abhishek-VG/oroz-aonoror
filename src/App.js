@@ -1,10 +1,9 @@
 import "./App.css";
-import AppRoute from "./AppRoute";
+import {Toggle} from './pages/Toggle';
 function App() {
   return (
     <div>
-      <p>hello</p>
-      <AppRoute />
+      <Toggle />
     </div>
   );
 }
