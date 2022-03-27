@@ -1,5 +1,6 @@
 import "./App.css";
-import { TodoLists } from "./todo/TodoLists";
+import AppRoute from "./AppRoute";
+
 function App() {
   return (
     <div>
