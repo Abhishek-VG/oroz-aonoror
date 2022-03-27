@@ -32,7 +32,10 @@ const MoviesAdd = () => {
       movieTickets,
     };
 
-    fetchApi("http://localhost:8080/movie", { method: "POST", body: movieObj })
+    const headers = new Headers()
+    headers.append("X-Auth-token", localStorage.getItem("access-token"))
+
+    fetchApi("http://localhost:8080/movie", { method: "POST", body: movieObj, headers })
       .then((resp) => resp.json())
       .then((obj) => {
         console.log(obj);

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { FormControl } from "@mui/material";
+
 // import { fetchApi } from "../utils/fetchMock";
 const MoviesEdit = () => {
   const navigate = useNavigate();
@@ -16,7 +17,10 @@ const MoviesEdit = () => {
   const [movieTickets, setmovieTickets] = React.useState(0);
 
   React.useEffect(() => {
-    fetchApi(`http://localhost:8080/movie/${id}`, { method: "GET" })
+    const headers = new Headers()
+    headers.append("X-Auth-token", localStorage.getItem("access-token"))
+
+    fetchApi(`http://localhost:8080/movie/${id}`, { method: "GET", headers })
       .then((resp) => resp.json()) 
       .then((obj) => {
         console.log(obj);
@@ -48,9 +52,13 @@ const MoviesEdit = () => {
       movieDate,
       movieTickets,
     };
+    const headers = new Headers()
+    headers.append("X-Auth-token", localStorage.getItem("access-token"))
+
     fetchApi(`http://localhost:8080/movie/${id}`, {
       method: "PUT",
       body: movieObj,
+      headers
     })
       .then((resp) => resp.json())
       .then((obj) => {

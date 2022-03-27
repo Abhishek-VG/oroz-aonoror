@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { fetchApi } from "../utils/fetchMock";
 
-export const Login = () => {
+export const Register = () => {
   let navigate = useNavigate();
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState();
@@ -20,18 +20,17 @@ export const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const loginObj = {
+    const regObj = {
       username,
       password,
     };
 
-    fetchApi("http://localhost:8080/user/login", {method: "POST", body: loginObj})
+    fetchApi("http://localhost:8080/user/register", {method: "POST", body: regObj})
       .then((resp) => resp.json())
       .then((obj) => {
         console.log(obj);
-        localStorage.setItem('access-token', obj["access-token"])
-        navigate(`/`);
-      }).catch(err=>alert(err));
+        navigate(`/login`);
+      });
   };
 
   return (
@@ -68,10 +67,10 @@ export const Login = () => {
               />
             </div>
             <Button type="submit" variant="contained" color="primary" sx={{margin: '10px'}}>
-              Login
+              Register
             </Button>
-            <Button type="submit" variant="contained"  onClick={()=>navigate("/register")} sx={{background: 'grey'}}>
-              Click to Register
+            <Button type="submit" variant="contained"  onClick={()=>navigate("/login")} sx={{background: 'grey'}}>
+              Click to Login
             </Button>
           </form>
         </Box>

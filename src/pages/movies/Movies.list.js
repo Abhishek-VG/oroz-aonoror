@@ -16,7 +16,10 @@ const MoviesList = () => {
   const [movieList, setMovieList] = React.useState([]);
   let navigate = useNavigate();
   React.useEffect(() => {
-    fetchApi("http://localhost:8080/movie", { method: "GET" })
+    const headers = new Headers()
+    headers.append("X-Auth-token", localStorage.getItem("access-token"))
+
+    fetchApi("http://localhost:8080/movie", { method: "GET", headers })
       .then((resp) => resp.json())
       .then((obj) => {
         console.log(obj);
@@ -24,7 +27,10 @@ const MoviesList = () => {
       });
   }, []);
   const editDeletHandler = () => {
-    fetchApi("http://localhost:8080/movie", { method: "GET" })
+    const headers = new Headers()
+    headers.append("X-Auth-token", localStorage.getItem("access-token"))
+
+    fetchApi("http://localhost:8080/movie", { method: "GET", headers })
       .then((resp) => resp.json())
       .then((obj) => {
         console.log(obj);
@@ -38,7 +44,10 @@ const MoviesList = () => {
     navigate(`/movies/edit/${id}`);
   };
   const handleDelete = (id) => {
-    fetchApi(`http://localhost:8080/movie/${id}`, { method: "DELETE" });
+    const headers = new Headers()
+    headers.append("X-Auth-token", localStorage.getItem("access-token"))
+
+    fetchApi(`http://localhost:8080/movie/${id}`, { method: "DELETE", headers });
     editDeletHandler();
   };
 

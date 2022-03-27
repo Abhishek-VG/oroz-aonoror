@@ -19,9 +19,12 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import MovieCreationIcon from "@mui/icons-material/MovieCreation";
 import { Link as LinkMui, Outlet } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import LogoutIcon from '@mui/icons-material/Logout';
+import { fetchApi } from "./pages/utils/fetchMock";
 
 const drawerWidth = 240;
 
@@ -100,7 +103,21 @@ const Link = styled(LinkMui, {
 
 export default function MiniDrawer() {
   const theme = useTheme();
+  const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    if(!localStorage.getItem("access-token")) {
+      navigate("/login")
+    }
+  })
+
+  const logout = ()=>{
+    fetchApi("http://localhost:8080/user/logout")
+    .then(() => {
+      navigate("/login")
+    }).catch(alert)
+  }
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -298,6 +315,30 @@ export default function MiniDrawer() {
           </Link>
         </List>
         <Divider />
+        <div to="" onClick={logout}>
+            <ListItemButton
+              key={"movie"}
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <LogoutIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary={"Logout"}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
+            </ListItemButton>
+          </div>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         {/* <DrawerHeader /> */}

@@ -6,6 +6,9 @@ import MoviesList from "./pages/movies/Movies.list";
 import TheaterAdd from "./pages/theaters/TheaterAdd";
 import TheaterEdit from "./pages/theaters/TheaterEdit";
 import TheaterList from "./pages/theaters/TheaterList";
+import { Register } from "./pages/register/register";
+import { Login } from "./pages/login/Login";
+
 import Main from "./main";
 const AppRoute = () => {
   return (
@@ -23,6 +26,8 @@ const AppRoute = () => {
             <Route path="list" element={<TheaterList />} />
           </Route>
         </Route>
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );

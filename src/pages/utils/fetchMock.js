@@ -1,4 +1,4 @@
-export const fetchApi = (URL, config) => {
+export const fetchApi = (URL, config={}) => {
   const { method = "GET", body } = config;
   tokenCheck(URL, config);
   let data;
@@ -52,6 +52,10 @@ const postData = (data, table) => {
 };
 
 const getFromLocalStorage = (URL) => {
+  if (getId(URL) === "logout") {
+    localStorage.removeItem("access-token");
+    return true;
+  }
   const parsedData = getData(getDb(URL));
   const id = getId(URL);
   if (!isNaN(id)) {
@@ -93,7 +97,8 @@ const addToLocalStorage = (URL, data) => {
     ) {
       return {username: obj.username, time: Date.now(), "access-token": tokenGenerate(obj)};
     } else {
-      throw Error("Invalid user");
+      return Promise.reject("Invalid user")
+      // throw Error("Invalid user");
     }
   } else {
     parsedData.push({ ...data, id: Date.now() });
