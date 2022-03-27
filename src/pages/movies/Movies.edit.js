@@ -17,7 +17,7 @@ const MoviesEdit = () => {
 
   React.useEffect(() => {
     fetchApi(`http://localhost:8080/movie/${id}`, { method: "GET" })
-      .then((resp) => resp.json()) 
+      .then((resp) => resp.json())
       .then((obj) => {
         console.log(obj);
         setmovieName(obj.movieName);
